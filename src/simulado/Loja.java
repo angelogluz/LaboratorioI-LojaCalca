@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package simulado;
 
 import java.util.Scanner;
-
-
 /**
  *
  * @author angelodaluz
@@ -33,7 +27,8 @@ public class Loja {
             System.out.println("|4. Comprar                                    |");
             System.out.println("|5. Verificar total de calças                  |");
             System.out.println("|6. Listar diversidade de calças               |");
-            System.out.println("|9. Sair                                       |");
+            System.out.println("|9. Salvar dados                                       |");
+            System.out.println("|10. Sair                                       |");
             System.out.println("+**********************************************+");
             System.out.print("Escolha uma opção: ");
             option = in.nextInt();
@@ -78,7 +73,7 @@ public class Loja {
                     break;
             }
 
-        } while (option != 9);
+        } while (option != 10);
 
     }
 

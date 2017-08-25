@@ -1,5 +1,12 @@
 package simulado;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author angelodaluz
@@ -14,6 +21,7 @@ public final class Calca {
     private double valorDeVenda; // Maior ou igual ao valor de compra
     // Atributo de classe ("global")
     private static int diversidadeDeCalcas;
+    
 
     /**
      * Construtor que considera que a calça está sendo comprada e cadastrada ao
@@ -33,6 +41,7 @@ public final class Calca {
         // Insere automaticamente o valor de vendo sendo 30% acima do valor de compra
         this.valorDeVenda = getValorDeCompra() + (getValorDeCompra() * 0.30);
         diversidadeDeCalcas++;
+        setEstoque(quantidade);
     }
 
     /**
@@ -155,6 +164,14 @@ public final class Calca {
     public static int getDiversidadeDeCalcas() {
         return diversidadeDeCalcas;
     }
+    
+    public void setEstoque(int qtde){
+        quantidade = quantidade + qtde;
+    }
+    
+    public void verificaEstoque(int qtde){
+        
+    }
 
     /**
      * Método que efetua a venda de um produto
@@ -162,10 +179,12 @@ public final class Calca {
      * @param quantidade vendida
      */
     public void vender(int quantidade) {
-        if (quantidade > 0) {
-            // reaproveitando a validação do setQuantidade.
-            setQuantidade(getQuantidade() - quantidade);
-        }
+//        if (quantidade > 0) {
+//             reaproveitando a validação do setQuantidade.
+//            setQuantidade(getQuantidade() - quantidade);
+//        }
+
+         
     }
 
     /**
@@ -179,7 +198,8 @@ public final class Calca {
             setQuantidade(getQuantidade() + quantidade);
         }
     }
-
+    
+ 
     /**
      * Definindo a forma como o objeto será impresso
      *
