@@ -1,5 +1,12 @@
 package simulado;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author angelodaluz
@@ -12,6 +19,7 @@ public final class Calca {
     private int quantidade; // Sempre positiva
     private double valorDeCompra; // Maior do que 0
     private double valorDeVenda; // Maior ou igual ao valor de compra
+    private int estoque = 0;
     // Atributo de classe ("global")
     private static int diversidadeDeCalcas;
 
@@ -24,6 +32,7 @@ public final class Calca {
      * @param marca da calça - entre 2 e 30 caracteres
      * @param quantidade valor positivo
      * @param valorDeCompra valor positivo
+     * @param estoque valor positivo
      */
     public Calca(int tamanho, String marca, int quantidade, double valorDeCompra) {
         setTamanho(tamanho);
@@ -33,6 +42,16 @@ public final class Calca {
         // Insere automaticamente o valor de vendo sendo 30% acima do valor de compra
         this.valorDeVenda = getValorDeCompra() + (getValorDeCompra() * 0.30);
         diversidadeDeCalcas++;
+        
+        int get = getEstoque();
+        int getqtde = getEstoque() + quantidade;
+        //int ok = setEstoque(getEstoque()+quantidade, "cadastrar");
+        
+        setEstoque(getqtde, "cadastrar");
+     
+        System.out.println("GET:" + get);
+        System.out.println("GETQTDE:" + getqtde);
+        
     }
 
     /**
@@ -156,16 +175,43 @@ public final class Calca {
         return diversidadeDeCalcas;
     }
 
+    public int setEstoque(int qtde, String value) {
+        if (value == "comprar" || value == "cadastrar") {
+            this.estoque = estoque + qtde;
+            System.out.println("qtde que veio:" + qtde);
+            System.out.println("estoque:" + estoque);
+        }
+        if (value == "vender") {
+            this.estoque = estoque - qtde;
+            System.out.println("qtde que veio:" + qtde);
+            System.out.println("estoque:" + estoque);
+        }
+        return estoque;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
     /**
      * Método que efetua a venda de um produto
      *
      * @param quantidade vendida
      */
-    public void vender(int quantidade) {
+    public boolean vender(int quantidade) {
+        boolean result=false;
         if (quantidade > 0) {
-            // reaproveitando a validação do setQuantidade.
+            //reaproveitando a validação do setQuantidade.
             setQuantidade(getQuantidade() - quantidade);
+            int atual = getEstoque();
+            if (atual >= quantidade) {
+                setEstoque(quantidade, "vender");
+                result = true;
+            } else {
+                result = false;
+            }
         }
+        return result;
     }
 
     /**
@@ -177,6 +223,7 @@ public final class Calca {
         if (quantidade > 0) {
             // reaproveitando a validação do setQuantidade.
             setQuantidade(getQuantidade() + quantidade);
+            setEstoque(quantidade, "comprar");
         }
     }
 
